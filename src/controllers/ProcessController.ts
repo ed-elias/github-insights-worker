@@ -1,4 +1,4 @@
-import  express from 'express';
+import express from 'express';
 import QueueService from "../services/QueueService";
 // @ts-ignore
 import Validator from 'max-validator';
@@ -19,26 +19,27 @@ class ProcessController {
 
     process = (request: express.Request, response: express.Response) => {
         const post: Post = request.body
-        let check  = Validator.validate(post, PostScheme)
-        if( !check.hasError){
+        let check = Validator.validate(post, PostScheme)
+        if (!check.hasError) {
             QueueService.getInstance().addSearch(post)
             response.status(202).send(post)
-        }else {
+        } else {
             response.status(400).send(post)
         }
     }
 
     reprocess = (request: express.Request, response: express.Response) => {
         const post: Post = request.body
-        let check  = Validator.validate(post, PostScheme)
-        if( !check.hasError){
-                QueueService.getInstance().publish(post)
-                response.status(200).send(post)
-        }else {
+        let check = Validator.validate(post, PostScheme)
+        if (!check.hasError) {
+            QueueService.getInstance().publish(post)
+            response.status(200).send(post)
+        } else {
             response.status(400).send(post)
         }
     }
 }
+
 const PostScheme = {
     committerCursor: 'required|string|min:40|max:60',
     repoName: 'required|string',

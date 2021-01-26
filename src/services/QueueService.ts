@@ -28,7 +28,7 @@ class QueueService {
         githubSearch = 'github-search',
         githubData = 'github-data',
         subscriptionName = 'github-search-pull',
-        keyFilename =  process.env.GOOGLE_KEY_PATH || '/home/ederson/google/unique-google.json'
+        keyFilename = process.env.GOOGLE_KEY_PATH || '/home/ederson/google/unique-google.json'
     ) {
         // Instantiates a client
         const pubsub = new PubSub({projectId, keyFilename});
@@ -36,7 +36,6 @@ class QueueService {
 
         this.githubSearch = pubsub.topic(githubSearch);
         this.githubData = pubsub.topic(githubData);
-
 
 
         const subscription = this.githubSearch.subscription(subscriptionName);
@@ -86,7 +85,7 @@ class QueueService {
 
             let limit = process.env.LIMIT_SEARCH || totalCount
 
-            while (i  <= limit) {
+            while (i <= limit) {
                 let cursor: object
                 if (i > -1) {
                     cursor = {committerCursor: `${message.committerCursor} ${i}`}

@@ -19,12 +19,12 @@ class App {
             type: 'application/json',
             verify: undefined
         }));
-        this.app.use(express.urlencoded({ extended: false }));
+        this.app.use(express.urlencoded({extended: false}));
     }
 
     private initializeControllers(controllers: any[]) {
         controllers.forEach((controller) => {
-            this.app.use('/',controller.router);
+            this.app.use('/', controller.router);
         });
     }
 

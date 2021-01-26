@@ -66,8 +66,8 @@ query ($repoName: String!, $repoOwner: String!, $committerCursor: String) {
         return JSON.parse(results).data.repository.object.history;
     }
 
-    public async getTotalCount (graphVariables: object): Promise<any>{
-        let response: any =  await this.execute(graphVariables)
+    public async getTotalCount(graphVariables: object): Promise<any> {
+        let response: any = await this.execute(graphVariables)
         return await response.totalCount
     }
 
@@ -78,14 +78,14 @@ query ($repoName: String!, $repoOwner: String!, $committerCursor: String) {
         users.data.forEach((userData: any) => {
             let node = userData.node;
             usersLists.push({
-                cursor:userData.cursor,
+                cursor: userData.cursor,
                 ...node.author.user,
                 "additions": node.additions,
                 "deletions": node.deletions,
                 "committedDate": node.committedDate,
             })
         });
-        return  await usersLists;
+        return await usersLists;
     }
 }
 

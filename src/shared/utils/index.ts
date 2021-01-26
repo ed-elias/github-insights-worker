@@ -1,8 +1,9 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable guard-for-in */
+
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 interface INode {
-    edges:Array<| {
+    edges: Array<| {
         cursor: string | null;
         node: {
             author: {
@@ -33,14 +34,14 @@ export const parseData = async (
             readonly cursor: string
             readonly additions: number;
             readonly deletions: number;
-        }| null
-    }| null>,
+        } | null
+    } | null>,
 ) => {
-    const { edges: parsedDNode }: INode = { edges: []};
+    const {edges: parsedDNode}: INode = {edges: []};
     edges.forEach(el => {
         if (el) {
             parsedDNode.push(el);
         }
     });
-    return { data: edges};
+    return {data: edges};
 };
